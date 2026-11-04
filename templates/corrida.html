@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrida / Caminhada</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sessao.js') }}"></script>
+</head>
+<body>
+
+    <main class="pagina-corrida">
+        <div class="cabecalho-pagina">
+            <p class="rotulo">Atividade</p>
+            <h1>Corrida</h1>
+        </div>
+
+        <div class="painel-cronometro" id="painel-cronometro">
+            <div id="badge-ao-vivo" style="display:none;">
+                <span class="badge-ao-vivo"><span class="ponto-pulsante"></span>EM ANDAMENTO</span>
+            </div>
+            <p id="status-corrida" style="color: var(--text-muted); font-size: 13px; margin-bottom: 8px;">Pronto pra começar</p>
+            <div class="metricas-corrida">
+                <div>
+                    <p class="num neutro" id="tempo-decorrido">00:00</p>
+                    <p class="rotulo-metrica">Tempo</p>
+                </div>
+                <div class="divisor"></div>
+                <div>
+                    <p class="num neutro" id="distancia-km">0.00</p>
+                    <p class="rotulo-metrica">km</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:16px;">
+            <button id="btn-iniciar" class="botao-corrida-iniciar" onclick="iniciarCorrida()">▶ Iniciar corrida</button>
+            <button id="btn-finalizar" class="botao-corrida-parar" onclick="finalizarCorrida()" disabled style="display:none;">■ Finalizar</button>
+        </div>
+
+        <div id="mapa" style="height: 300px; margin-top: 20px; display: none;"></div>
+
+        <p style="text-align: center; margin-top: 16px; font-size: 13px;">
+            <a href="/historico" style="color: var(--text-muted);">Esqueceu de registrar uma corrida? Adicione no Histórico</a>
+        </p>
+
+        <nav class="menu-inferior">
+            <a href="/">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+                Início
+            </a>
+            <a href="/treinos">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7v10M18 7v10M2 10v4M22 10v4M6 12h12"/></svg>
+                Treinos
+            </a>
+            <a href="/biblioteca">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h4v16H4zM10 4h10v16H10z"/></svg>
+                Biblioteca
+            </a>
+            <a href="/corrida" class="ativo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4l-3 6 4 2-2 8M9 10L5 8m10 12l3-4-3-2"/></svg>
+                Corrida
+            </a>
+            <a href="/historico">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                Histórico
+            </a>
+            <a href="/perfil">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+                Perfil
+            </a>
+        </nav>
+    </main>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/corrida.js') }}"></script>
+</body>
+</html>

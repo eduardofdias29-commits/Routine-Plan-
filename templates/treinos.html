@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sessao.js') }}"></script>
+</head>
+<body>
+
+    <main>
+        <div class="cabecalho-pagina">
+            <p class="rotulo">Organização</p>
+            <h1>Treinos</h1>
+        </div>
+
+        <section class="card">
+            <h2>Meus treinos</h2>
+            <div id="lista-modelos"></div>
+
+            <div class="linha-form" style="margin-top: 12px;">
+                <input type="text" id="input-novo-modelo" placeholder="Nome do novo treino (ex: Peito e Tríceps)">
+                <button class="botao-primario" onclick="criarModelo()">Criar</button>
+            </div>
+        </section>
+
+        <section class="card" id="secao-exercicios-modelo" style="display: none;">
+            <h2>Exercícios de "<span id="nome-modelo-atual"></span>"</h2>
+            <div id="exercicios-do-treino"></div>
+
+            <div style="margin-top: 16px;">
+                <input type="text" id="busca-exercicio" placeholder="Buscar exercício (ex: supino, agachamento...)" oninput="buscarExercicios()">
+                <div id="filtros" class="filtros">
+                    <button class="filtro-btn ativo" data-grupo="">Todos</button>
+                </div>
+                <div id="grid-biblioteca" class="grid-exercicios"></div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Semana-modelo</h2>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">
+                Defina o treino de cada dia da semana e aplique no calendário. Os dias que você já escolheu não são alterados.
+            </p>
+
+            <div class="linha-form">
+                <select id="select-dias-semana">
+                    <option value="1">1 dia por semana</option>
+                    <option value="2">2 dias por semana</option>
+                    <option value="3">3 dias por semana</option>
+                    <option value="4" selected>4 dias por semana</option>
+                    <option value="5">5 dias por semana</option>
+                    <option value="6">6 dias por semana</option>
+                </select>
+                <button onclick="sugerirSemanaModelo()">Sugerir semana</button>
+            </div>
+
+            <div id="lista-semana-modelo"></div>
+
+            <div class="linha-form" style="margin-top: 12px;">
+                <select id="select-semanas">
+                    <option value="2">Próximas 2 semanas</option>
+                    <option value="4" selected>Próximas 4 semanas</option>
+                    <option value="8">Próximas 8 semanas</option>
+                    <option value="12">Próximas 12 semanas</option>
+                </select>
+                <button class="botao-primario" onclick="aplicarSemanaModelo()">Aplicar</button>
+            </div>
+            <p id="status-semana-modelo" class="texto-status"></p>
+        </section>
+
+        <section class="card">
+            <h2>Calendário</h2>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">
+                Escolha qual treino vai em cada dia. Muda quando quiser, sem perder nada.
+            </p>
+
+            <div id="lista-agenda"></div>
+
+            <button id="btn-mostrar-mais" style="width: 100%; margin-top: 12px;" onclick="mostrarMaisMeses()">Mostrar mais dias</button>
+        </section>
+
+        <div id="modal-adicionar" class="modal escondido">
+            <div class="modal-conteudo">
+                <h3 id="modal-nome-exercicio"></h3>
+                <label>Séries <input type="number" id="input-series" value="3"></label>
+                <label>Repetições <input type="number" id="input-repeticoes" value="12"></label>
+                <label>Carga (kg) <input type="number" id="input-carga" value="0" step="0.5"></label>
+                <div class="linha-botoes-modal">
+                    <button class="botao-primario" onclick="confirmarAdicionar()">Adicionar</button>
+                    <button onclick="fecharModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="menu-inferior">
+            <a href="/">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+                Início
+            </a>
+            <a href="/treinos" class="ativo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7v10M18 7v10M2 10v4M22 10v4M6 12h12"/></svg>
+                Treinos
+            </a>
+            <a href="/biblioteca">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h4v16H4zM10 4h10v16H10z"/></svg>
+                Biblioteca
+            </a>
+            <a href="/corrida">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4l-3 6 4 2-2 8M9 10L5 8m10 12l3-4-3-2"/></svg>
+                Corrida
+            </a>
+            <a href="/historico">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                Histórico
+            </a>
+            <a href="/perfil">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+                Perfil
+            </a>
+        </nav>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/treinos.js') }}"></script>
+</body>
+</html>

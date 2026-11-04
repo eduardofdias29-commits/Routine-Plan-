@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sessao.js') }}"></script>
+    <title>Biblioteca de Exercícios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main>
+        <div class="cabecalho-pagina">
+            <p class="rotulo">Explorar</p>
+            <h1>Biblioteca</h1>
+        </div>
+
+        <div class="campo-busca">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="busca-biblioteca" placeholder="Buscar exercício (ex: remada, supino...)" autocomplete="off" oninput="aoDigitarBusca()">
+            <button class="botao-limpar-busca" id="limpar-busca" onclick="limparBusca()" aria-label="Limpar busca">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+        </div>
+
+        <div id="filtros" class="filtros">
+            <button class="filtro-btn ativo" data-grupo="">Todos</button>
+        </div>
+
+        <p id="contagem-resultados" class="contagem-resultados"></p>
+
+        <div id="grid-exercicios" class="grid-exercicios">
+            <p>Carregando...</p>
+        </div>
+
+        <button id="btn-mostrar-mais" class="botao-mostrar-mais" style="display:none;" onclick="mostrarMais()">Mostrar mais</button>
+
+        <div id="modal-detalhe" class="modal modal-detalhe escondido" onclick="fecharDetalheFora(event)">
+            <div class="modal-conteudo">
+                <img id="detalhe-imagem" alt="" onclick="alternarAnimacao()">
+                <p id="detalhe-legenda" class="legenda-movimento"></p>
+                <h3 id="detalhe-nome"></h3>
+                <span id="detalhe-grupo" class="tag-grupo"></span>
+                <button style="margin-top: 14px;" onclick="fecharDetalhe()">Fechar</button>
+            </div>
+        </div>
+
+        <nav class="menu-inferior">
+            <a href="/">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+                Início
+            </a>
+            <a href="/treinos">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7v10M18 7v10M2 10v4M22 10v4M6 12h12"/></svg>
+                Treinos
+            </a>
+            <a href="/biblioteca" class="ativo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h4v16H4zM10 4h10v16H10z"/></svg>
+                Biblioteca
+            </a>
+            <a href="/corrida">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4l-3 6 4 2-2 8M9 10L5 8m10 12l3-4-3-2"/></svg>
+                Corrida
+            </a>
+            <a href="/historico">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                Histórico
+            </a>
+            <a href="/perfil">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+                Perfil
+            </a>
+        </nav>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/biblioteca.js') }}"></script>
+</body>
+</html>
