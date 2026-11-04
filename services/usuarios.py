@@ -1,8 +1,7 @@
 import hashlib
 import secrets
-import sqlite3
 
-from database import get_connection
+from database import get_connection, IntegrityError
 
 ALFABETO = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 TAMANHO_CODIGO = 10
@@ -42,7 +41,7 @@ def criar_usuario_com_codigo(nome, meta_agua_ml=4000, meta_km_semanal=10):
             )
             conn.commit()
             return cursor.lastrowid, formatar_codigo(codigo)
-        except sqlite3.IntegrityError:
+        except IntegrityError:
             continue
         finally:
             conn.close()
@@ -69,7 +68,7 @@ def gerar_novo_codigo(usuario_id):
             )
             conn.commit()
             return formatar_codigo(codigo)
-        except sqlite3.IntegrityError:
+        except IntegrityError:
             continue
         finally:
             conn.close()
