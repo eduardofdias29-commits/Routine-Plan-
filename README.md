@@ -1,4 +1,4 @@
-# RoutinePlan — Treinos, Água e Corrida
+# RoutinePlan — Treinos, Água e Corrida.
 
 **Site no ar:** https://SEU-APP.onrender.com
 
@@ -17,7 +17,7 @@ O projeto também é um exemplo de como um aplicativo de saúde pode funcionar n
 
 Os 876 exercícios vêm do [Free Exercise DB](https://github.com/yuhonas/free-exercise-db). Os nomes foram traduzidos para português por mim e ficam no arquivo `traducoes.csv`.
 
-> O site roda no plano gratuito do Render, que dorme depois de um tempo parado, e o primeiro acesso demora cerca de um minuto. Os dados ficam em um banco Postgres gratuito (Neon), então nick e treinos continuam salvos entre atualizações e funcionam no celular e no computador.
+> Essa é a primeira versão do site roda no plano gratuito do Render, que dorme depois de um tempo parado, e o primeiro acesso demora cerca de um minuto. Os dados ficam em um banco Postgres gratuito (Neon), então nick e treinos continuam salvos entre atualizações e funcionam no celular e no computador.
 
 ## Stack
 
