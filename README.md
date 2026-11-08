@@ -6,8 +6,11 @@
 
 ## Preview
 
-<!-- Troque por um GIF ou print salvo em docs/ -->
-![RoutinePlan](docs/preview.gif)
+
+![Início](docs/RoutinePlan3.png)
+![Treinos](docs/RoutinePlan1.png)
+![Biblioteca](docs/RoutinePlan2.png)
+
 
 ## Sobre o projeto
 
