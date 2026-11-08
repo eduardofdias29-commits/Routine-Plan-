@@ -1,6 +1,6 @@
 # RoutinePlan — Treinos, Água e Corrida.
 
-**Site no ar:** https://SEU-APP.onrender.com
+**Site no ar:** https://routineplan.onrender.com
 
 > Projeto pessoal e independente, feito para estudo e portfólio.
 
